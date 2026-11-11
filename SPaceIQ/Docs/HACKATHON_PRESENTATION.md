@@ -1,4 +1,4 @@
-# Orbit Recall — 5-minute hackathon presentation
+# SPace IQ — 5-minute hackathon presentation
 
 ## 1 · Mission briefing (0:00–0:35)
 **Slide:** “Can you remember your way to orbit?”

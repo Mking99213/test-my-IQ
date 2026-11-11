@@ -1,14 +1,14 @@
 # Setup and local verification
 
 ## Requirements
-- Unreal Engine 5.4 through Epic Games Launcher (or a compatible source build).
-- Windows: Visual Studio 2022 with **Game development with C++**, MSVC and a supported Windows SDK. Mac: an Xcode version supported by your UE version. Linux: Epic's matching toolchain and a working UE installation.
+- Unreal Engine 5.8.4 through Epic Games Launcher (or a compatible source build).
+- Windows: Visual Studio 2022 with **Game development with C++**, the MSVC and Windows SDK versions supported by your UE 5.8 installation. Mac: an Xcode version supported by your UE version. Linux: Epic's matching toolchain and a working UE installation.
 - A desktop with UE5-capable graphics. Python scripting is an editor plugin enabled in the project; it is not required by the packaged game.
 
 ## Open and build
-1. Extract the entire ZIP into a writable folder. Keep `OrbitRecall.uproject`, `Source`, `Config`, `Scripts` together.
-2. On Windows, right-click `OrbitRecall.uproject` → Generate Visual Studio project files. Open the generated solution. Build **Development Editor / Win64 / OrbitRecall**. Alternatively open the .uproject and accept the prompt to compile missing modules. On Mac/Linux generate project files and compile `OrbitRecallEditor` using your engine's normal workflow.
-3. Open the .uproject with UE 5.4. A missing LaunchSite map warning on the first open is expected: no binary .umap is shipped. Dismiss it or open a new empty level.
+1. Extract the entire ZIP into a writable folder. Keep `SPaceIQ.uproject`, `Source`, `Config`, `Scripts` together.
+2. On Windows, right-click `SPaceIQ.uproject` → Generate Visual Studio project files. Open the generated solution. Build **Development Editor / Win64 / SPaceIQ**. Alternatively open the .uproject and accept the prompt to compile missing modules. On Mac/Linux generate project files and compile `SPaceIQEditor` using your engine's normal workflow.
+3. Open the .uproject with UE 5.8. A missing LaunchSite map warning on the first open is expected: no binary .umap is shipped. Dismiss it or open a new empty level.
 4. In **Tools → Execute Python Script**, choose `Scripts/create_map.py`. If that menu is absent, enable **Python Editor Script Plugin** and **Editor Scripting Utilities**, restart, and try again. The script creates and saves `/Game/Maps/LaunchSite`. It preserves an existing map.
 5. **Close and reopen Unreal after the script imports the tones.** Then open `Content/Maps/LaunchSite` and press **Play** in Selected Viewport or New Editor Window. Ensure Play uses the default player at a current camera location or default spawn; runtime geometry is created by the game mode. A PlayerStart is not required.
 
@@ -16,7 +16,7 @@ To create the map via command line after a successful editor build:
 
 Windows PowerShell (replace paths; run from the extracted project folder):
 ```powershell
-& 'C:\Program Files\Epic Games\UE_5.4\Engine\Binaries\Win64\UnrealEditor-Cmd.exe' "$PWD\OrbitRecall.uproject" "-ExecutePythonScript=$PWD\Scripts\create_map.py" -unattended -nosplash -NullRHI
+& 'C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor-Cmd.exe' "$PWD\SPaceIQ.uproject" "-ExecutePythonScript=$PWD\Scripts\create_map.py" -unattended -nosplash -NullRHI
 ```
 Use your platform's UnrealEditor-Cmd binary on Linux/Mac. The interactive Tools menu path is recommended for the first run.
 

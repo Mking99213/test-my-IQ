@@ -9,6 +9,8 @@
 #include "Engine/SkyLight.h"
 #include "Components/LightComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "Materials/MaterialInterface.h"
+#include "Components/SceneComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "InputCoreTypes.h"
 #include "Sound/SoundWave.h"
@@ -46,6 +48,15 @@ void AMissionPawn::Tick(float Delta) {
 AMissionMode::AMissionMode() {
  PrimaryActorTick.bCanEverTick=true;
  DefaultPawnClass=AMissionPawn::StaticClass(); HUDClass=AMissionHUD::StaticClass();
+ // Hard references retain the procedural world's engine assets during cooking.
+ const TCHAR* Names[]={TEXT("Cube"),TEXT("Sphere"),TEXT("Cylinder"),TEXT("Cone")};
+ for(const TCHAR* Name:Names) {
+  const FString Path=FString::Printf(TEXT("/Engine/BasicShapes/%s.%s"),Name,Name);
+  ConstructorHelpers::FObjectFinder<UStaticMesh> Mesh(*Path);
+  ShapeAssets.Add(Mesh.Object);
+ }
+ static ConstructorHelpers::FObjectFinder<UMaterialInterface> Material(TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
+ ShapeMaterial=Material.Object;
  static ConstructorHelpers::FObjectFinder<USoundWave> A(TEXT("/Game/Audio/Tone1.Tone1"));
  static ConstructorHelpers::FObjectFinder<USoundWave> B(TEXT("/Game/Audio/Tone2.Tone2"));
  static ConstructorHelpers::FObjectFinder<USoundWave> C(TEXT("/Game/Audio/Tone3.Tone3"));
@@ -53,8 +64,8 @@ AMissionMode::AMissionMode() {
  Tones.Add(A.Object); Tones.Add(B.Object); Tones.Add(C.Object); Tones.Add(D.Object);
 }
 void AMissionMode::Paint(UStaticMeshComponent* Mesh,FLinearColor Color) {
- auto Base=LoadObject<UMaterialInterface>(nullptr,TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
- auto Mat=UMaterialInstanceDynamic::Create(Base,this);
+ if(!Mesh || !ShapeMaterial) return;
+ auto Mat=UMaterialInstanceDynamic::Create(ShapeMaterial,this);
  if(Mat) { Mat->SetVectorParameterValue(TEXT("Color"),Color); Mesh->SetMaterial(0,Mat); }
 }
 UStaticMeshComponent* AMissionMode::Part(AActor* Owner,const TCHAR* Shape,FVector Location,FVector Scale,FLinearColor Color) {
@@ -72,6 +83,7 @@ UStaticMeshComponent* AMissionMode::Part(AActor* Owner,const TCHAR* Shape,FVecto
 void AMissionMode::BeginPlay() {
  Super::BeginPlay();
  auto PC=GetWorld()->GetFirstPlayerController();
+ if(!PC) return;
  PC->bShowMouseCursor=true; PC->bEnableClickEvents=true; PC->SetInputMode(FInputModeGameAndUI());
  auto Site=GetWorld()->SpawnActor<AActor>();
  auto SiteRoot=NewObject<USceneComponent>(Site); Site->AddInstanceComponent(SiteRoot); Site->SetRootComponent(SiteRoot); SiteRoot->RegisterComponent();
@@ -117,7 +129,7 @@ void AMissionMode::Action(int Symbol) {
    if(Modality>0 && !HasAudio) { Status=TEXT("Audio missing: run Scripts/create_map.py, then restart the editor."); return; }
    NewSequence();
   }
-  else if(Phase==3) { Phase=4; Clock=0; Status=TEXT("Crew boarded. Launch sequence engaged."); GetWorld()->GetFirstPlayerController()->GetPawn()->SetActorHiddenInGame(true); }
+  else if(Phase==3) { Phase=4; Clock=0; Status=TEXT("Crew boarded. Launch sequence engaged."); if(auto P=GetWorld()->GetFirstPlayerController()->GetPawn()) P->SetActorHiddenInGame(true); }
   return;
  }
  if(Phase!=2) return;
@@ -162,7 +174,7 @@ void AMissionHUD::DrawHUD() {
  Super::DrawHUD(); auto M=GetWorld()->GetAuthGameMode<AMissionMode>(); if(!M||!Canvas) return;
  const float W=Canvas->SizeX;
  DrawRect(FLinearColor(.01,.02,.045,.94),0,0,W,190);
- Label(TEXT("ORBIT / RECALL"),28,20,Cyan,2);
+ Label(TEXT("SPace IQ"),28,20,Cyan,2);
  Label(TEXT("NASA-INSPIRED FLIGHT READINESS SIMULATOR"),28,54,FLinearColor(.6,.7,.8));
  Label(FString::Printf(TEXT("SYSTEMS %d / 3    |    RETRIES %d"),M->Mission.Stage,M->Mission.Mistakes),28,84);
  Label(M->Status,28,112);
@@ -182,7 +194,7 @@ void AMissionHUD::DrawHUD() {
    const float BW=FMath::Min(130.f,(W-80)/4.f);
    Button(FName(*FString::FromInt(i)),Symbols[i],28+i*(BW+8),Y+35,BW,Lit?Orange:FLinearColor(.08,.19,.28));
   }
-  Label(M->Phase==1?TEXT("Watch each flash. Repeated symbols have a short dark gap."):FString::Printf(TEXT("Correct inputs: %d / %d"),M->Mission.Cursor,M->Mission.Length()),28,Y+100,Cyan);
+  Label(M->Phase==1?(M->Modality==1?TEXT("Listen to the tones, then repeat using 1-4."):TEXT("Watch each flash. Repeated symbols have a short dark gap.")):FString::Printf(TEXT("Correct inputs: %d / %d"),M->Mission.Cursor,M->Mission.Length()),28,Y+100,Cyan);
  }
  if(M->Phase==3) Button(TEXT("Start"),TEXT("BOARD & LAUNCH [SPACE]"),28,Y,285,Orange*.65f);
  if(M->Phase==4) Label(M->Clock<5?FString::Printf(TEXT("T - %d"),FMath::CeilToInt(5-M->Clock)):TEXT("LIFTOFF - climbing to orbit"),28,Y,Orange,2);

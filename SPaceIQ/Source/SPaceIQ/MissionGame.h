@@ -7,15 +7,17 @@
 #include "MissionGame.generated.h"
 class UStaticMeshComponent;
 class USoundWave;
+class UStaticMesh;
+class UMaterialInterface;
 UCLASS()
-class ORBITRECALL_API AMissionPawn : public APawn {
+class SPACEIQ_API AMissionPawn : public APawn {
  GENERATED_BODY()
 public:
  AMissionPawn();
  virtual void Tick(float Delta) override;
 };
 UCLASS()
-class ORBITRECALL_API AMissionMode : public AGameModeBase {
+class SPACEIQ_API AMissionMode : public AGameModeBase {
  GENERATED_BODY()
 public:
  AMissionMode();
@@ -35,13 +37,15 @@ public:
  int Phase=0;
  float Clock=0;
  FString Status=TEXT("Welcome, astronaut. Prepare three flight systems.");
+ UPROPERTY() TArray<TObjectPtr<UStaticMesh>> ShapeAssets;
+ UPROPERTY() TObjectPtr<UMaterialInterface> ShapeMaterial;
  UPROPERTY() TObjectPtr<AActor> Rocket;
  UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> Indicators;
  UStaticMeshComponent* Part(AActor* Owner,const TCHAR* Shape,FVector Location,FVector Scale,FLinearColor Color);
  void Paint(UStaticMeshComponent* Mesh,FLinearColor Color);
 };
 UCLASS()
-class ORBITRECALL_API AMissionHUD : public AHUD {
+class SPACEIQ_API AMissionHUD : public AHUD {
  GENERATED_BODY()
 public:
  virtual void DrawHUD() override;

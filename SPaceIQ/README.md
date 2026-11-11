@@ -1,4 +1,4 @@
-# Orbit Recall
+# SPace IQ
 ### A NASA-inspired astronaut memory puzzle · Unreal Engine 5 source starter
 
 Prepare fuel routing, navigation, and life support by recalling three increasingly long symbol sequences. Board the rocket, watch the countdown and launch, and reach the mission success screen.
@@ -11,7 +11,7 @@ Prepare fuel routing, navigation, and life support by recalling three increasing
 - No Marketplace purchases, external art downloads, or template content required. All meshes/materials come from Unreal Engine BasicShapes.
 
 ## Start here
-Read [SETUP.md](Docs/SETUP.md). This is a **source project**, not a compiled game. Build the editor target, generate the map once with the included script, then press Play. Target: UE 5.4, with UE 5.4+ intended; later engine versions may require target-setting updates.
+Read [SETUP.md](Docs/SETUP.md). This is a **source project**, not a compiled game. Build the editor target, generate the map once with the included script, then press Play. Target configuration: UE 5.8 family, specifically the 5.8.4 installation shown by the project owner. Engine compilation remains unverified; see Docs/UPGRADE_5_8.md.
 
 Controls: M selects Visual / Audio / Both before starting; WASD moves the astronaut on the launch apron; 1–4 or buttons repeat the pattern; Space starts/launches; R resets. Use a desktop window of at least 960×600 (1280×720 recommended). Click the viewport if keyboard focus is elsewhere.
 
@@ -25,7 +25,7 @@ Controls: M selects Visual / Audio / Both before starting; WASD moves the astron
 The terminal interactions are available from anywhere on the apron; walking is optional. The astronaut is represented by engine primitives and is hidden when boarding. Camera framing is fixed relative to the astronaut. The launch is a scripted animation; orbital insertion is a game abstraction, not a physics simulation.
 
 ## Project layout
-`Source/OrbitRecall/MissionLogic.h` holds engine-independent rules. `MissionGame.h/.cpp` supplies the pawn, mission game mode, world geometry, input, and HUD. `Scripts/create_map.py` creates the saved level used for packaging. `Docs/` contains setup, architecture, acceptance checks and presentation notes.
+`Source/SPaceIQ/MissionLogic.h` holds engine-independent rules. `MissionGame.h/.cpp` supplies the pawn, mission game mode, world geometry, input, and HUD. `Scripts/create_map.py` creates the saved level used for packaging. `Docs/` contains setup, architecture, acceptance checks and presentation notes.
 
 ## Validation status
 The portable C++ mission rules tests were compiled and run in the delivery environment. No Unreal Engine installation was available, so UnrealHeaderTool, full C++ module compilation, editor play, rendered appearance and packaged execution have **not** been verified. Follow the acceptance checklist in SETUP before a demo. This is a working-code starter intended for local UE validation, not a certified packaged build.
@@ -35,3 +35,11 @@ Independent educational prototype inspired by NASA missions. Not affiliated with
 
 ## Visual Studio Code and participant comparisons
 See [VS Code setup](Docs/VSCODE.md) and [comparison protocol](Docs/COMPARISON_PROTOCOL.md). This prototype is not a validated cognitive assessment and does not establish fairness across ages or education. Visual/audio patterns reduce reliance on factual knowledge. Restart the editor after the first map/audio setup.
+
+## Upgrading from the previous starter
+Use the fresh SPaceIQ project folder. All native module and target names changed. See [UE 5.8 migration](Docs/UPGRADE_5_8.md) before reusing old maps or generated files.
+
+## Branding
+![SPace IQ — Launch with your mind](Assets/Branding/SPaceIQ-logo.png)
+
+The included hand-painted-style logo depicts a rocket launched by a glowing brain-shaped trail. It is a source branding image for slides, repository artwork and optional Unreal UI use; the current HUD continues to render its title as text. To use it in Unreal, import Assets/Branding/SPaceIQ-logo.png into the Content Browser and place it in a UMG Image widget.

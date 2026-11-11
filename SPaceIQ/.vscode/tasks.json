@@ -6,10 +6,10 @@
       "type": "shell",
       "command": "${input:ueRoot}/Engine/Build/BatchFiles/Build.bat",
       "args": [
-        "OrbitRecallEditor",
+        "SPaceIQEditor",
         "Win64",
         "Development",
-        "${workspaceFolder}/OrbitRecall.uproject",
+        "${workspaceFolder}/SPaceIQ.uproject",
         "-WaitMutex"
       ],
       "options": {
@@ -26,7 +26,7 @@
       "type": "process",
       "command": "${input:ueRoot}/Engine/Binaries/Win64/UnrealEditor.exe",
       "args": [
-        "${workspaceFolder}/OrbitRecall.uproject"
+        "${workspaceFolder}/SPaceIQ.uproject"
       ],
       "problemMatcher": []
     }
@@ -36,7 +36,7 @@
       "id": "ueRoot",
       "type": "promptString",
       "description": "Unreal Engine installation root",
-      "default": "C:/Program Files/Epic Games/UE_5.4"
+      "default": "C:/Program Files/Epic Games/UE_5.8"
     }
   ]
 }
