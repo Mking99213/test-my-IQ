@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "UE: Build Editor (Windows)",
+      "type": "shell",
+      "command": "${input:ueRoot}/Engine/Build/BatchFiles/Build.bat",
+      "args": [
+        "OrbitRecallEditor",
+        "Win64",
+        "Development",
+        "${workspaceFolder}/OrbitRecall.uproject",
+        "-WaitMutex"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "UE: Open Editor (Windows)",
+      "type": "process",
+      "command": "${input:ueRoot}/Engine/Binaries/Win64/UnrealEditor.exe",
+      "args": [
+        "${workspaceFolder}/OrbitRecall.uproject"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "ueRoot",
+      "type": "promptString",
+      "description": "Unreal Engine installation root",
+      "default": "C:/Program Files/Epic Games/UE_5.4"
+    }
+  ]
+}
