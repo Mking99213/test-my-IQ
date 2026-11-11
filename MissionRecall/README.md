@@ -1,4 +1,4 @@
-# SPace IQ
+# Mission Recall
 ### A NASA-inspired astronaut memory puzzle · Unreal Engine 5 source starter
 
 Prepare fuel routing, navigation, and life support by recalling three increasingly long symbol sequences. Board the rocket, watch the countdown and launch, and reach the mission success screen.
@@ -25,21 +25,21 @@ Controls: M selects Visual / Audio / Both before starting; WASD moves the astron
 The terminal interactions are available from anywhere on the apron; walking is optional. The astronaut is represented by engine primitives and is hidden when boarding. Camera framing is fixed relative to the astronaut. The launch is a scripted animation; orbital insertion is a game abstraction, not a physics simulation.
 
 ## Project layout
-`Source/SPaceIQ/MissionLogic.h` holds engine-independent rules. `MissionGame.h/.cpp` supplies the pawn, mission game mode, world geometry, input, and HUD. `Scripts/create_map.py` creates the saved level used for packaging. `Docs/` contains setup, architecture, acceptance checks and presentation notes.
+`Source/MissionRecall/MissionLogic.h` holds engine-independent rules. `MissionGame.h/.cpp` supplies the pawn, mission game mode, world geometry, input, and HUD. `Scripts/create_map.py` creates the saved level used for packaging. `Docs/` contains setup, architecture, acceptance checks and presentation notes.
 
 ## Validation status
 The portable C++ mission rules tests were compiled and run in the delivery environment. No Unreal Engine installation was available, so UnrealHeaderTool, full C++ module compilation, editor play, rendered appearance and packaged execution have **not** been verified. Follow the acceptance checklist in SETUP before a demo. This is a working-code starter intended for local UE validation, not a certified packaged build.
 
 ## Theme and rights
-Independent educational prototype inspired by NASA missions. Not affiliated with or endorsed by NASA. No NASA logos, insignia, photographs, or official assets are included. The code is MIT licensed; Unreal Engine and its bundled assets remain subject to Epic's terms. Do not imply agency endorsement when adding branding.
+Independent educational prototype inspired by NASA missions. Not affiliated with or endorsed by NASA. The branding artwork includes a reference-based recreation of the NASA Space Apps Jeddah event mark supplied by the project owner. It is not an original official logo file and does not imply endorsement. The code is MIT licensed; Unreal Engine and its bundled assets remain subject to Epic's terms. Do not imply agency endorsement when adding branding.
 
 ## Visual Studio Code and participant comparisons
 See [VS Code setup](Docs/VSCODE.md) and [comparison protocol](Docs/COMPARISON_PROTOCOL.md). This prototype is not a validated cognitive assessment and does not establish fairness across ages or education. Visual/audio patterns reduce reliance on factual knowledge. Restart the editor after the first map/audio setup.
 
 ## Upgrading from the previous starter
-Use the fresh SPaceIQ project folder. All native module and target names changed. See [UE 5.8 migration](Docs/UPGRADE_5_8.md) before reusing old maps or generated files.
+Use the fresh MissionRecall project folder. All native module and target names changed. See [UE 5.8 migration](Docs/UPGRADE_5_8.md) before reusing old maps or generated files.
 
 ## Branding
-![SPace IQ — Launch with your mind](Assets/Branding/SPaceIQ-logo.png)
+![Mission Recall — Remember. Prepare. Launch.](Assets/Branding/MissionRecall-logo.png)
 
-The included hand-painted-style logo depicts a rocket launched by a glowing brain-shaped trail. It is a source branding image for slides, repository artwork and optional Unreal UI use; the current HUD continues to render its title as text. To use it in Unreal, import Assets/Branding/SPaceIQ-logo.png into the Content Browser and place it in a UMG Image widget.
+The professional navy, cyan and orange artwork combines a rocket, orbit and memory nodes, with a reference-based NASA Space Apps Jeddah mark at top-left. It is a source branding image for slides, repository artwork and optional Unreal UI use; the current HUD continues to render its title as text. To use it in Unreal, import Assets/Branding/MissionRecall-logo.png into the Content Browser and place it in a UMG Image widget.

@@ -174,7 +174,7 @@ void AMissionHUD::DrawHUD() {
  Super::DrawHUD(); auto M=GetWorld()->GetAuthGameMode<AMissionMode>(); if(!M||!Canvas) return;
  const float W=Canvas->SizeX;
  DrawRect(FLinearColor(.01,.02,.045,.94),0,0,W,190);
- Label(TEXT("SPace IQ"),28,20,Cyan,2);
+ Label(TEXT("Mission Recall"),28,20,Cyan,2);
  Label(TEXT("NASA-INSPIRED FLIGHT READINESS SIMULATOR"),28,54,FLinearColor(.6,.7,.8));
  Label(FString::Printf(TEXT("SYSTEMS %d / 3    |    RETRIES %d"),M->Mission.Stage,M->Mission.Mistakes),28,84);
  Label(M->Status,28,112);

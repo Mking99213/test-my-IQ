@@ -6,10 +6,10 @@
       "type": "shell",
       "command": "${input:ueRoot}/Engine/Build/BatchFiles/Build.bat",
       "args": [
-        "SPaceIQEditor",
+        "MissionRecallEditor",
         "Win64",
         "Development",
-        "${workspaceFolder}/SPaceIQ.uproject",
+        "${workspaceFolder}/MissionRecall.uproject",
         "-WaitMutex"
       ],
       "options": {
@@ -26,7 +26,7 @@
       "type": "process",
       "command": "${input:ueRoot}/Engine/Binaries/Win64/UnrealEditor.exe",
       "args": [
-        "${workspaceFolder}/SPaceIQ.uproject"
+        "${workspaceFolder}/MissionRecall.uproject"
       ],
       "problemMatcher": []
     }

@@ -10,14 +10,14 @@ class USoundWave;
 class UStaticMesh;
 class UMaterialInterface;
 UCLASS()
-class SPACEIQ_API AMissionPawn : public APawn {
+class MISSIONRECALL_API AMissionPawn : public APawn {
  GENERATED_BODY()
 public:
  AMissionPawn();
  virtual void Tick(float Delta) override;
 };
 UCLASS()
-class SPACEIQ_API AMissionMode : public AGameModeBase {
+class MISSIONRECALL_API AMissionMode : public AGameModeBase {
  GENERATED_BODY()
 public:
  AMissionMode();
@@ -45,7 +45,7 @@ public:
  void Paint(UStaticMeshComponent* Mesh,FLinearColor Color);
 };
 UCLASS()
-class SPACEIQ_API AMissionHUD : public AHUD {
+class MISSIONRECALL_API AMissionHUD : public AHUD {
  GENERATED_BODY()
 public:
  virtual void DrawHUD() override;

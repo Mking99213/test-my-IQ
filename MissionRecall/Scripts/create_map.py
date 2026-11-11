@@ -26,10 +26,10 @@ else:
     if not subsystem.new_level(MAP):
         raise RuntimeError("Could not create LaunchSite")
     world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
-    mode = unreal.load_class(None, "/Script/SPaceIQ.MissionMode")
+    mode = unreal.load_class(None, "/Script/MissionRecall.MissionMode")
     if mode is None:
-        raise RuntimeError("Compile SPaceIQEditor before generating the map")
+        raise RuntimeError("Compile MissionRecallEditor before generating the map")
     world.get_world_settings().set_editor_property("default_game_mode", mode)
     if not subsystem.save_current_level():
         raise RuntimeError("Could not save LaunchSite")
-    unreal.log("LaunchSite saved. Press Play to begin SPace IQ.")
+    unreal.log("LaunchSite saved. Press Play to begin Mission Recall.")

@@ -1,4 +1,4 @@
-# SPace IQ — 5-minute hackathon presentation
+# Mission Recall — 5-minute hackathon presentation
 
 ## 1 · Mission briefing (0:00–0:35)
 **Slide:** “Can you remember your way to orbit?”
@@ -22,7 +22,7 @@ Show the C++ state machine, engine-independent mission rules, procedural site an
 Roadmap: input remapping, adjustable timing and difficulty, bespoke astronaut animation, proximity-based terminals, varied puzzle types, scores and user testing. Keep these distinct from delivered features.
 
 ## 6 · Closing and questions (4:25–5:00)
-**Slide:** “Remember the sequence. Ready the rocket. Reach orbit.”
+**Slide:** “Remember. Prepare. Launch.”
 Ask judges to try a mission. Share a link/QR to your uploaded source archive or packaged build after hosting it. Credit Unreal Engine; describe this as independent and NASA-inspired. No NASA endorsement is claimed.
 
 ## Likely judge questions

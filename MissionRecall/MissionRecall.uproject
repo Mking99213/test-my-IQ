@@ -2,10 +2,10 @@
   "FileVersion": 3,
   "EngineAssociation": "5.8",
   "Category": "Games",
-  "Description": "SPace IQ: visual and auditory astronaut memory challenges",
+  "Description": "Mission Recall: visual and auditory astronaut memory challenges",
   "Modules": [
     {
-      "Name": "SPaceIQ",
+      "Name": "MissionRecall",
       "Type": "Runtime",
       "LoadingPhase": "Default"
     }
